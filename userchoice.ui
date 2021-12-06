@@ -108,7 +108,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Book store</string>
+   <string>book store</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -155,7 +155,7 @@
      <item row="1" column="1">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Авторизация&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;войти в систему как&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
@@ -277,7 +277,7 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Клиент</string>
+          <string>клиент</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -354,7 +354,7 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Кладовщик</string>
+          <string>кладовщик</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -431,7 +431,7 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Оператор</string>
+          <string>оператор</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -508,7 +508,7 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Администратор</string>
+          <string>администратор</string>
          </property>
          <property name="flat">
           <bool>true</bool>

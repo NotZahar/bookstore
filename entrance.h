@@ -2,6 +2,8 @@
 #define ENTRANCE_H
 
 #include "userchoice.h"
+#include "signin.h"
+#include "clientsignup.h"
 #include "state.h"
 
 class Entrance : public State
@@ -15,12 +17,18 @@ public:
     void setThisStateAsCurrent(QList<QVariant> data);
 
 private slots:
-    void userRoleIsChosen(int u);
+    void userRoleIsChosen(int userRole);
+    void clientSignUpIsChosen();
+    void backFromSignInIsChosen();
+    //void backFromClientSignUpIsChosen();
+    void userSignedInSystem();
 
 private:
     int userRole;
 
-    UserChoice* userChoiceView;
+    UserChoice *userChoiceView;
+    SignIn *signInView;
+    ClientSignUp *clientSignUpView;
 
     QWidget *currentView;
 
