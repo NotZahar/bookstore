@@ -1,6 +1,7 @@
 #ifndef ENTRANCE_H
 #define ENTRANCE_H
 
+#include "userchoice.h"
 #include "state.h"
 
 class Entrance : public State
@@ -14,9 +15,12 @@ public:
     void setThisStateAsCurrent(QList<QVariant> data);
 
 private slots:
+    void userRoleIsChosen(int u);
 
 private:
     int userRole;
+
+    UserChoice* userChoiceView;
 
     QWidget *currentView;
 

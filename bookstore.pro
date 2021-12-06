@@ -14,15 +14,18 @@ SOURCES += \
     entrance.cpp \
     main.cpp \
     state.cpp \
-    statemanager.cpp
+    statemanager.cpp \
+    userchoice.cpp
 
 HEADERS += \
     bookstore.h \
     entrance.h \
     state.h \
-    statemanager.h
+    statemanager.h \
+    userchoice.h
 
-FORMS +=
+FORMS += \
+    userchoice.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
