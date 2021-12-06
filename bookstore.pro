@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 RC_FILE += resources.rc
 
@@ -11,9 +11,16 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    main.cpp
+    entrance.cpp \
+    main.cpp \
+    state.cpp \
+    statemanager.cpp
 
-HEADERS +=
+HEADERS += \
+    bookstore.h \
+    entrance.h \
+    state.h \
+    statemanager.h
 
 FORMS +=
 
