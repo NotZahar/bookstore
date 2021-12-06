@@ -1,5 +1,7 @@
 QT       += core gui
 
+RC_FILE += resources.rc
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
