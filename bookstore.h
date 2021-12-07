@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QMessageBox>
+#include <QString>
 
 struct Bookstore
 {

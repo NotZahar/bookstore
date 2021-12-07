@@ -35,11 +35,11 @@ void ClientsHomePage::displayClientData(const QList<QVariant> &data)
     ui->label_11->setText(clientDataModel.record(0).value("phone").toString());
     ui->label_12->setText(clientDataModel.record(0).value("email").toString());
 
-    QString clientsOrdersDataQueryString = "SELECT orderdate AS 'Дата', ordertime AS "
-                                           "'Время', orderstatus AS 'Статус', cost AS "
-                                           "'Стоимость', paymentmethod AS 'Способ оплаты', "
+    QString clientsOrdersDataQueryString = "SELECT orderdate AS 'дата', ordertime AS "
+                                           "'время', orderstatus AS 'статус', cost AS "
+                                           "'стоимость', paymentmethod AS 'способ оплаты', "
                                            "(SELECT address FROM deliverypoint WHERE ordering.deliverypoint "
-                                           "= deliverypoint.pointid) AS 'Пункт выдачи' FROM ordering WHERE customer = %1;";
+                                           "= deliverypoint.pointid) AS 'пункт выдачи' FROM ordering WHERE customer = %1;";
 
     if (clientsOrdersDataModel != nullptr)
     {
@@ -56,6 +56,11 @@ void ClientsHomePage::displayClientData(const QList<QVariant> &data)
 
     ui->tableView->setModel(clientsOrdersDataModel);
     ui->tableView->repaint();
+}
+
+QString ClientsHomePage::getEmail()
+{
+    return ui->label_12->text();
 }
 
 void ClientsHomePage::goToShopButtonIsPushed()

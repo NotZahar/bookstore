@@ -27,6 +27,7 @@ public:
     ~ClientsHomePage();
 
     void displayClientData(const QList<QVariant> &data);
+    QString getEmail();
 
 signals:
     void clientWantedToShop();

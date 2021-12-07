@@ -64,6 +64,7 @@ void ClientsWorkBench::clientPaymentIsChosen()
 
 void ClientsWorkBench::backFromClientShopIsChosen()
 {
+    clientsHomePageView->displayClientData({clientsHomePageView->getEmail()});
     changeView(clientsHomePageView);
 }
 
