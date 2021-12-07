@@ -1,7 +1,7 @@
 #include <QApplication>
 #include <QIcon>
 
-#include "statemanager.h"
+#include "./states/statemanager.h"
 #include "bookstore.h"
 
 int main(int argc, char *argv[])

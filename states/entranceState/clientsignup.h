@@ -8,7 +8,7 @@
 #include <QSqlRecord>
 #include <QMessageBox>
 
-#include "bookstore.h"
+#include "../../bookstore.h"
 
 namespace Ui {
 class ClientSignUp;

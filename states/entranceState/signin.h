@@ -7,7 +7,7 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 
-#include "bookstore.h"
+#include "../../bookstore.h"
 
 namespace Ui {
 class SignIn;

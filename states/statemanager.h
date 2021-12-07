@@ -4,8 +4,9 @@
 #include <QMap>
 #include <QList>
 
-#include "bookstore.h"
-#include "entrance.h"
+#include "../bookstore.h"
+#include "./states/entranceState/entrance.h"
+#include "./states/clientState/clientsworkbench.h"
 
 class StateManager : public QObject
 {

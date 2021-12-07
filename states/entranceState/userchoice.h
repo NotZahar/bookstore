@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include "bookstore.h"
+#include "../../bookstore.h"
 
 namespace Ui {
 class UserChoice;
