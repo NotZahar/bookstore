@@ -39,6 +39,7 @@ void ClientsWorkBench::clientWantsToShop()
     {
         clientsShopPageView = new ClientsShopPage();
         QObject::connect(clientsShopPageView, &ClientsShopPage::backFromClientShopWasChosen, this, &ClientsWorkBench::backFromClientShopIsChosen);
+        QObject::connect(clientsShopPageView, &ClientsShopPage::clientPaymentWasChosen, this, &ClientsWorkBench::clientPaymentIsChosen);
     }
 
     changeView(clientsShopPageView);
@@ -50,9 +51,25 @@ void ClientsWorkBench::clientExitsFromHomePage()
     emit stateWasFinished(Bookstore::states::entrance, {});
 }
 
+void ClientsWorkBench::clientPaymentIsChosen()
+{
+    if (clientPaymentView == nullptr)
+    {
+        clientPaymentView = new ClientPayment();
+        QObject::connect(clientPaymentView, &ClientPayment::backFromClientPaymentWasChosen, this, &ClientsWorkBench::backFromClientPaymentIsChosen);
+    }
+
+    changeView(clientPaymentView);
+}
+
 void ClientsWorkBench::backFromClientShopIsChosen()
 {
-    //dffds
+    changeView(clientsHomePageView);
+}
+
+void ClientsWorkBench::backFromClientPaymentIsChosen()
+{
+    changeView(clientsShopPageView);
 }
 
 void ClientsWorkBench::changeView(QWidget *view)
@@ -61,5 +78,3 @@ void ClientsWorkBench::changeView(QWidget *view)
     currentView = view;
     currentView->show();
 }
-
-

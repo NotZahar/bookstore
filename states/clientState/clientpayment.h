@@ -15,6 +15,9 @@ public:
     explicit ClientPayment(QWidget *parent = nullptr);
     ~ClientPayment();
 
+signals:
+    void backFromClientPaymentWasChosen();
+
 private:
     Ui::ClientPayment *ui;
 };

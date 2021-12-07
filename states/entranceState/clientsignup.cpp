@@ -76,4 +76,6 @@ void ClientSignUp::clientSignUpButtonIsPushed(bool)
         QMessageBox::warning(nullptr, "проблема с подключением к базе данных", "ошибка запроса");
         return;
     }
+
+    QMessageBox::information(nullptr, "регистрация нового пользователя", "новый пользователь зарегистрирован");
 }

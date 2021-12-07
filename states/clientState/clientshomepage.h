@@ -4,6 +4,15 @@
 #include <QWidget>
 #include <QList>
 #include <QVariant>
+#include <QSql>
+#include <QSqlError>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QSqlTableModel>
+#include <QMessageBox>
+
+#include "../../bookstore.h"
 
 namespace Ui {
 class ClientsHomePage;
@@ -23,8 +32,14 @@ signals:
     void clientWantedToShop();
     void clientExitedFromHomePage();
 
+private slots:
+    void goToShopButtonIsPushed();
+    void clientExitsFromSystemButtonIsPushed(bool c);
+
 private:
     Ui::ClientsHomePage *ui;
+
+    QSqlQueryModel *clientsOrdersDataModel;
 };
 
 #endif // CLIENTSHOMEPAGE_H

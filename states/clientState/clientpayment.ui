@@ -315,19 +315,22 @@
      </item>
      <item>
       <widget class="QComboBox" name="comboBox">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
        <item>
         <property name="text">
-         <string>онлайн</string>
+         <string>Онлайн</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>картой</string>
+         <string>Картой</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>наличные</string>
+         <string>Наличные</string>
         </property>
        </item>
       </widget>

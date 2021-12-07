@@ -16,7 +16,11 @@ public:
     ~ClientsShopPage();
 
 signals:
+    void clientPaymentWasChosen();
     void backFromClientShopWasChosen();
+
+/*private slots:
+    void backFromClientShopIsChosen(bool c);*/
 
 private:
     Ui::ClientsShopPage *ui;

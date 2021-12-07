@@ -12,3 +12,8 @@ ClientsShopPage::~ClientsShopPage()
 {
     delete ui;
 }
+
+/*void ClientsShopPage::backFromClientShopIsChosen(bool c)
+{
+    // !!!!!!!!!!!!!!!!!
+}*/

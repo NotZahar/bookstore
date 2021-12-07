@@ -20,6 +20,8 @@ State *StateManager::createState(int stateId)
     {
     case Bookstore::states::entrance:
         return new Entrance();
+    case Bookstore::states::clientsWorkBench:
+        return new ClientsWorkBench();
     default:
         return nullptr;
     }
