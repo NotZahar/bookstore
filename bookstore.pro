@@ -12,6 +12,7 @@ CONFIG += c++11
 
 SOURCES += \
     clientsignup.cpp \
+    clientsworkbench.cpp \
     entrance.cpp \
     main.cpp \
     signin.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 HEADERS += \
     bookstore.h \
     clientsignup.h \
+    clientsworkbench.h \
     entrance.h \
     signin.h \
     state.h \

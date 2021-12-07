@@ -10,7 +10,11 @@ struct Bookstore
 {
     enum states : int
     {
-        entrance
+        entrance,
+        clientsWorkBench,
+        storekeepersWorkBench,
+        dpoperatorsWorkBench,
+        administratorsWorkBench
     };
 
     enum users : int

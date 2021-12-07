@@ -2,6 +2,10 @@
 #define SIGNIN_H
 
 #include <QWidget>
+#include <QSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QMessageBox>
 
 #include "bookstore.h"
 
@@ -18,7 +22,8 @@ public:
     ~SignIn();
 
     void clearView();
-    void setUserRole(int u);
+    void setUserRole(int uRole);
+    QString getEmail();
 
 signals:
     void clientSignUpWasChosen();
@@ -34,6 +39,8 @@ private:
     Ui::SignIn *ui;
 
     int userRole;
+
+    QString getTableName();
 };
 
 #endif // SIGNIN_H

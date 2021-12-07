@@ -61,8 +61,9 @@ void Entrance::clientSignUpIsChosen()
         if (clientSignUpView == nullptr)
         {
             clientSignUpView = new ClientSignUp();
-            //QObject::connect(signUpReaderView, &SignUpReader::backFromSignUpReaderWasChosen, this, &Entrance::backFromSignUpReaderIsChosen);
+            QObject::connect(clientSignUpView, &ClientSignUp::backFromClientSignUpWasChosen, this, &Entrance::backFromClientSignUpIsChosen);
         }
+
         changeView(clientSignUpView);
     }
 }
@@ -72,14 +73,41 @@ void Entrance::backFromSignInIsChosen()
     changeView(userChoiceView);
 }
 
-/*void Entrance::backFromClientSignUpIsChosen()
+void Entrance::backFromClientSignUpIsChosen()
 {
-
-}*/
+    changeView(signInView);
+}
 
 void Entrance::userSignedInSystem()
 {
-    // !!!!!!!!!!!
+    currentView->hide();
+    switch (userRole)
+    {
+    case Bookstore::users::client:
+    {
+        emit stateWasFinished(Bookstore::states::clientsWorkBench, {signInView->getEmail()});
+        break;
+    }
+    case Bookstore::users::storekeeper:
+    {
+        emit stateWasFinished(Bookstore::states::storekeepersWorkBench, {signInView->getEmail()});
+        break;
+    }
+    case Bookstore::users::dpoperator:
+    {
+        emit stateWasFinished(Bookstore::states::dpoperatorsWorkBench, {signInView->getEmail()});
+        break;
+    }
+    case Bookstore::users::administrator:
+    {
+        emit stateWasFinished(Bookstore::states::administratorsWorkBench, {});
+        break;
+    }
+    default:
+    {
+        break;
+    }
+    }
 }
 
 void Entrance::changeView(QWidget *view)

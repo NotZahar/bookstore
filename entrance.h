@@ -20,7 +20,7 @@ private slots:
     void userRoleIsChosen(int userRole);
     void clientSignUpIsChosen();
     void backFromSignInIsChosen();
-    //void backFromClientSignUpIsChosen();
+    void backFromClientSignUpIsChosen();
     void userSignedInSystem();
 
 private:
