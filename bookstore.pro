@@ -8,6 +8,7 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
+    states/clientState/clientpayment.cpp \
     states/clientState/clientshomepage.cpp \
     states/clientState/clientsshoppage.cpp \
     states/clientState/clientsworkbench.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
 
 HEADERS += \
     bookstore.h \
+    states/clientState/clientpayment.h \
     states/clientState/clientshomepage.h \
     states/clientState/clientsshoppage.h \
     states/clientState/clientsworkbench.h \
@@ -31,6 +33,7 @@ HEADERS += \
     states/statemanager.h \
 
 FORMS += \
+    states/clientState/clientpayment.ui \
     states/clientState/clientshomepage.ui \
     states/clientState/clientsshoppage.ui \
     states/entranceState/clientsignup.ui \

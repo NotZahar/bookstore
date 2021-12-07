@@ -12,3 +12,8 @@ ClientsHomePage::~ClientsHomePage()
 {
     delete ui;
 }
+
+void ClientsHomePage::displayClientData(const QList<QVariant> &data)
+{
+    // !!!!!!!!!!!!!!!!!!!!
+}

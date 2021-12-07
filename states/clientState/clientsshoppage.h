@@ -15,6 +15,9 @@ public:
     explicit ClientsShopPage(QWidget *parent = nullptr);
     ~ClientsShopPage();
 
+signals:
+    void backFromClientShopWasChosen();
+
 private:
     Ui::ClientsShopPage *ui;
 };

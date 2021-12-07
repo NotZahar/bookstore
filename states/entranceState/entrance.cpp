@@ -8,6 +8,7 @@ Entrance::Entrance() :
     currentView(userChoiceView)
 {
     currentView->show();
+
     QObject::connect(userChoiceView, &UserChoice::userRoleIsChosen, this, &Entrance::userRoleIsChosen);
 }
 
