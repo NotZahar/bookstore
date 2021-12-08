@@ -55,6 +55,7 @@ void ClientsHomePage::displayClientData(const QList<QVariant> &data)
     }
 
     ui->tableView->setModel(clientsOrdersDataModel);
+    ui->tableView->resizeColumnsToContents();
     ui->tableView->repaint();
 }
 

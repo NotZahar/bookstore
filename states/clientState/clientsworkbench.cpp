@@ -42,6 +42,7 @@ void ClientsWorkBench::clientWantsToShop()
         QObject::connect(clientsShopPageView, &ClientsShopPage::clientPaymentWasChosen, this, &ClientsWorkBench::clientPaymentIsChosen);
     }
 
+    clientsShopPageView->booksSearchIsStarted();
     changeView(clientsShopPageView);
 }
 
@@ -70,6 +71,7 @@ void ClientsWorkBench::backFromClientShopIsChosen()
 
 void ClientsWorkBench::backFromClientPaymentIsChosen()
 {
+    clientsShopPageView->booksSearchIsStarted();
     changeView(clientsShopPageView);
 }
 

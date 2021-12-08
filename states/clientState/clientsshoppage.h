@@ -10,7 +10,10 @@
 #include <QSqlTableModel>
 #include <QMessageBox>
 #include <QString>
-#include <QMap>
+#include <vector>
+#include <utility>
+#include <algorithm>
+#include <QDebug>
 
 #include "../../bookstore.h"
 
@@ -30,15 +33,17 @@ signals:
     void clientPaymentWasChosen();
     void backFromClientShopWasChosen();
 
+public slots:
+    void booksSearchIsStarted(bool c = false);
+
 private slots:
-    void booksSearchWasStarted(bool c);
     void backFromClientShopIsChosen(bool c);
 
 private:
     Ui::ClientsShopPage *ui;
 
-    QSqlTableModel *booksSearchModel;
-    const QMap<QString, QString> bookTableColumnNames;
+    QSqlQueryModel *booksSearchModel;
+    const std::vector<std::pair<QString, QString>> bookTableColumnNames;
 };
 
 #endif // CLIENTSSHOPPAGE_H

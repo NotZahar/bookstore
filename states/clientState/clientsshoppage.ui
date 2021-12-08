@@ -342,29 +342,6 @@
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;в корзину добавятся&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot; font-size:18pt; color:#f4e53b;&quot;&gt;все&lt;/span&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt; книги&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_11">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0" colspan="2">
         <spacer name="horizontalSpacer_3">

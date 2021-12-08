@@ -450,7 +450,7 @@
       <widget class="QTableView" name="tableView">
        <property name="minimumSize">
         <size>
-         <width>500</width>
+         <width>520</width>
          <height>0</height>
         </size>
        </property>
@@ -801,7 +801,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>50</width>
+             <width>30</width>
              <height>20</height>
             </size>
            </property>
