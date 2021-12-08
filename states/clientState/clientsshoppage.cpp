@@ -30,7 +30,8 @@ ClientsShopPage::~ClientsShopPage()
 
 void ClientsShopPage::booksSearchWasStarted(bool)
 {
-    if (booksSearchModel != nullptr)
+    выкинуть нахуй QSqlTableModel
+    /*if (booksSearchModel != nullptr)
     {
         booksSearchModel->clear();
     }
@@ -56,7 +57,7 @@ void ClientsShopPage::booksSearchWasStarted(bool)
     booksSearchModel->setFilter(booksSearchModelFilter);
     booksSearchModel->setEditStrategy(QSqlTableModel::OnFieldChange);
 
-    ui->tableView_2->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->tableView_2->setDisabled();
 
     if (!booksSearchModel->select())
     {
@@ -65,7 +66,7 @@ void ClientsShopPage::booksSearchWasStarted(bool)
     }
 
     ui->tableView_2->setModel(booksSearchModel);
-    ui->tableView_2->repaint();
+    ui->tableView_2->repaint();*/
 }
 
 void ClientsShopPage::backFromClientShopIsChosen(bool)
