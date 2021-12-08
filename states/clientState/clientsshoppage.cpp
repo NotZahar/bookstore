@@ -103,6 +103,14 @@ void ClientsShopPage::backFromClientShopIsChosen(bool)
 
 void ClientsShopPage::inCartButtonIsPushed(bool)
 {
+    booksSearchIsStarted();
+
+    for (int i = 0; i < getAmountOfBookCopies(); ++i)
+    {
+
+        // booksSearchModel->record(i).value("isbn").toInt();
+    }
+
     QString cartModelQueryString = "";
 
     if (cartModel != nullptr)
@@ -122,28 +130,7 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
     ui->tableView->setModel(cartModel);
     ui->tableView->repaint();
 
-    /*QString countQueryString = "SELECT COUNT(*) AS bookcopiescount FROM (";
-    countQueryString += [this]()
-                        {
-                            QString lastQueryString = booksSearchModel->query().lastQuery();
-                            lastQueryString.chop(1);
-                            return lastQueryString;
-                        }();
-    countQueryString += ") AS rowcount;";
-
-    QSqlQuery countQuery(QSqlDatabase::database("main connection"));
-    if (!countQuery.exec(countQueryString))
-    {
-        QMessageBox::warning(nullptr, "проблема с подключением к базе данных", "ошибка запроса");
-        return;
-    }
-
-    int amountOfBookCopies = 0;
-    if (countQuery.next())
-    {
-        amountOfBookCopies = countQuery.value("bookcopiescount").toInt();
-    }
-
+    /*
     for (int i = 0; i < amountOfBookCopies; ++i)
     {
         booksSearchModel->record(i).value("isbn").toInt();
@@ -250,11 +237,39 @@ int ClientsShopPage::getCurrentOrderid()
         return impossibleOrderId;
     }
 
-    int currentOrderId = impossibleOrderId;
+    int curOrderId = impossibleOrderId;
     if (getCurrentOrderIdQuery.next())
     {
-        currentOrderId = getCurrentOrderIdQuery.value("orderid").toInt();
+        curOrderId = getCurrentOrderIdQuery.value("orderid").toInt();
     }
 
-    return currentOrderId;
+    return curOrderId;
+}
+
+int ClientsShopPage::getAmountOfBookCopies()
+{
+    const int impossibleAmountOfBookCopies = -1;
+    QString countQueryString = "SELECT COUNT(*) AS bookcopiescount FROM (";
+    countQueryString += [this]()
+                        {
+                            QString lastQueryString = booksSearchModel->query().lastQuery();
+                            lastQueryString.chop(1);
+                            return lastQueryString;
+                        }();
+    countQueryString += ") AS rowcount;";
+
+    QSqlQuery countQuery(QSqlDatabase::database("main connection"));
+    if (!countQuery.exec(countQueryString))
+    {
+        QMessageBox::warning(nullptr, "проблема с подключением к базе данных", "ошибка запроса");
+        return impossibleAmountOfBookCopies;
+    }
+
+    int amountOfBookCopies = impossibleAmountOfBookCopies;
+    if (countQuery.next())
+    {
+        amountOfBookCopies = countQuery.value("bookcopiescount").toInt();
+    }
+
+    return amountOfBookCopies;
 }
