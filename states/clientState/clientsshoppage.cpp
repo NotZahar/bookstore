@@ -105,13 +105,38 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
 {
     booksSearchIsStarted();
 
-    for (int i = 0; i < getAmountOfBookCopies(); ++i)
+    long long currentISBN;
+    int numberOfCopiesWithCurrentISBN;
+    for (int i = 0; i < getAmountOfCurrentISBNs(); ++i)
     {
+        currentISBN = booksSearchModel->record(i).value("isbn").toLongLong();
+        numberOfCopiesWithCurrentISBN = booksSearchModel->record(i).value("в наличии").toInt();
 
-        // booksSearchModel->record(i).value("isbn").toInt();
+        QString getAllCopiesOfCurrentISBNQueryString = "SELECT bookcopy.copyid "
+                                         "FROM book JOIN bookcopy ON "
+                                         "book.isbn = bookcopy.isbn "
+                                         "WHERE book.isbn = %1;";
+        QSqlQuery getAllCopiesOfCurrentISBNQuery(QSqlDatabase::database("main connection"));
+        if (!getAllCopiesOfCurrentISBNQuery.exec(getAllCopiesOfCurrentISBNQueryString.arg(currentISBN)))
+        {
+            QMessageBox::warning(nullptr, "проблема с подключением к базе данных", "ошибка запроса");
+            return;
+        }
+
+        for (int j = 0; j < numberOfCopiesWithCurrentISBN; ++j)
+        {
+            int copyId;
+            if (getAllCopiesOfCurrentISBNQuery.next())
+            {
+                copyId = getAllCopiesOfCurrentISBNQuery.value("copyid").toInt();
+            }
+
+            // нужно сделать попытаться сделать инсерт в cart
+            // жестко задать в combo box адреса dp
+        }
     }
 
-    QString cartModelQueryString = "";
+    /*QString cartModelQueryString = "";
 
     if (cartModel != nullptr)
     {
@@ -128,7 +153,7 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
     }
 
     ui->tableView->setModel(cartModel);
-    ui->tableView->repaint();
+    ui->tableView->repaint();*/
 
     /*
     for (int i = 0; i < amountOfBookCopies; ++i)
@@ -246,10 +271,10 @@ int ClientsShopPage::getCurrentOrderid()
     return curOrderId;
 }
 
-int ClientsShopPage::getAmountOfBookCopies()
+int ClientsShopPage::getAmountOfCurrentISBNs()
 {
-    const int impossibleAmountOfBookCopies = -1;
-    QString countQueryString = "SELECT COUNT(*) AS bookcopiescount FROM (";
+    const int impossibleAmountOfCurrentISBNs = -1;
+    QString countQueryString = "SELECT COUNT(*) AS currentisbnscount FROM (";
     countQueryString += [this]()
                         {
                             QString lastQueryString = booksSearchModel->query().lastQuery();
@@ -262,14 +287,14 @@ int ClientsShopPage::getAmountOfBookCopies()
     if (!countQuery.exec(countQueryString))
     {
         QMessageBox::warning(nullptr, "проблема с подключением к базе данных", "ошибка запроса");
-        return impossibleAmountOfBookCopies;
+        return impossibleAmountOfCurrentISBNs;
     }
 
-    int amountOfBookCopies = impossibleAmountOfBookCopies;
+    int amountOfCurrentISBNs = impossibleAmountOfCurrentISBNs;
     if (countQuery.next())
     {
-        amountOfBookCopies = countQuery.value("bookcopiescount").toInt();
+        amountOfCurrentISBNs = countQuery.value("currentisbnscount").toInt();
     }
 
-    return amountOfBookCopies;
+    return amountOfCurrentISBNs;
 }

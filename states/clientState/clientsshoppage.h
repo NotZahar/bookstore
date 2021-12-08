@@ -58,7 +58,7 @@ private:
 
     int getClientId();
     int getCurrentOrderid();
-    int getAmountOfBookCopies();
+    int getAmountOfCurrentISBNs();
 };
 
 #endif // CLIENTSSHOPPAGE_H
