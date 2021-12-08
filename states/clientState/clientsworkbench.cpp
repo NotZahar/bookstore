@@ -42,7 +42,9 @@ void ClientsWorkBench::clientWantsToShop()
         QObject::connect(clientsShopPageView, &ClientsShopPage::clientPaymentWasChosen, this, &ClientsWorkBench::clientPaymentIsChosen);
     }
 
+    clientsShopPageView->setClientEmail(clientsHomePageView->getEmail());
     clientsShopPageView->booksSearchIsStarted();
+    clientsShopPageView->addNewOrder();
     changeView(clientsShopPageView);
 }
 
