@@ -51,7 +51,6 @@ private:
     QSqlQueryModel *cartModel;
     const int impossibleOrderId;
     const int impossibleClientId;
-    const int impossibleCurrentOrderTotalCost;
     int currentOrderId;
     int currentOrderTotalCost;
     const std::vector<std::pair<QString, QString>> bookTableColumnNames;

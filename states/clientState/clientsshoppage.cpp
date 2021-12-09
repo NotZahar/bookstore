@@ -9,9 +9,8 @@ ClientsShopPage::ClientsShopPage(QWidget *parent) :
     cartModel(nullptr),
     impossibleOrderId(-1),
     impossibleClientId(-1),
-    impossibleCurrentOrderTotalCost(-1),
     currentOrderId(impossibleOrderId),
-    currentOrderTotalCost(impossibleCurrentOrderTotalCost),
+    currentOrderTotalCost(0),
     bookTableColumnNames({{"isbn", "isbn"},
                           {"название книги", "booktitle"},
                           {"авторы", "authorsnames"},
@@ -105,8 +104,11 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
 {
     booksSearchIsStarted();
 
+    // push book copies to cart
     long long currentISBN;
     int numberOfCopiesWithCurrentISBN;
+    const int impossibleCopyId = -1;
+    int copyId = impossibleCopyId;
     for (int i = 0; i < getAmountOfCurrentISBNs(); ++i)
     {
         currentISBN = booksSearchModel->record(i).value("isbn").toLongLong();
@@ -117,7 +119,8 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
                                          "book.isbn = bookcopy.isbn "
                                          "WHERE book.isbn = %1;";
         QSqlQuery getAllCopiesOfCurrentISBNQuery(QSqlDatabase::database("main connection"));
-        if (!getAllCopiesOfCurrentISBNQuery.exec(getAllCopiesOfCurrentISBNQueryString.arg(currentISBN)))
+        if (!getAllCopiesOfCurrentISBNQuery.exec(getAllCopiesOfCurrentISBNQueryString
+                                                 .arg(currentISBN)))
         {
             QMessageBox::warning(nullptr, "проблема с подключением к базе данных", "ошибка запроса");
             return;
@@ -125,17 +128,38 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
 
         for (int j = 0; j < numberOfCopiesWithCurrentISBN; ++j)
         {
-            int copyId;
+            copyId = impossibleCopyId;
             if (getAllCopiesOfCurrentISBNQuery.next())
             {
                 copyId = getAllCopiesOfCurrentISBNQuery.value("copyid").toInt();
             }
 
-            // нужно сделать попытаться сделать инсерт в cart
-            // жестко задать в combo box адреса dp
+            QString insertIntoCartQueryString = "INSERT INTO cart (orderid, copyid) "
+                                                "VALUES (%1, %2);";
+            QSqlQuery insertIntoCartQuery(QSqlDatabase::database("main connection"));
+            if (insertIntoCartQuery.exec(insertIntoCartQueryString
+                                          .arg(currentOrderId)
+                                          .arg(copyId)))
+            {
+                QString getISBNsCostQueryString = "SELECT DISTINCT cost FROM book JOIN "
+                                                  "bookcopy ON book.isbn = bookcopy.isbn "
+                                                  "where book.isbn = %1;";
+                QSqlQuery getISBNsCostQuery(QSqlDatabase::database("main connection"));
+                if (getISBNsCostQuery.exec(getISBNsCostQueryString
+                                              .arg(currentISBN)))
+                {
+                    if (getISBNsCostQuery.next())
+                    {
+                        currentOrderTotalCost += getISBNsCostQuery.value("cost").toInt();
+                    }
+                }
+
+                break;
+            }
         }
     }
 
+    // display cart on view
     /*QString cartModelQueryString = "";
 
     if (cartModel != nullptr)
@@ -154,67 +178,6 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
 
     ui->tableView->setModel(cartModel);
     ui->tableView->repaint();*/
-
-    /*
-    for (int i = 0; i < amountOfBookCopies; ++i)
-    {
-        booksSearchModel->record(i).value("isbn").toInt();
-    }*/
-
-    /*QString cartQueryString;
-    for (int i = 0; i < amountOfBookCopies; ++i)
-    {
-        cartQueryString += "INSERT INTO cart VALUES (";
-        cartQueryString += ;
-        cartQueryString += ", ";
-        cartQueryString += ;
-        cartQueryString += "); ";
-    }
-
-    clientDataModel.record(0).value("surname").toString()
-
-    qDebug() << cartQueryString;*/
-
-    /*QSqlQuery checkQuery(QSqlDatabase::database("main connection"));
-    QString checkQueryString = "SELECT * FROM Librarian WHERE (Login = '%2' OR Email = '%3' OR PhoneNumber = '%4');";
-
-    if (!checkQuery.exec(checkQueryString
-                         .arg(ui->lineEdit->text())
-                         .arg(ui->lineEdit_5->text())
-                         .arg(ui->lineEdit_6->text())))
-    {
-        QMessageBox::warning(nullptr, "Проблема с подключением к базе данных", "Ошибка запроса");
-        return;
-    }
-
-    if (checkQuery.next())
-    {
-        QMessageBox::critical(nullptr, "Ошибка ввода", "Пользователь с такими логином или E-mail или номером уже зарегистрирован");
-        return;
-    }*/
-
-    /*if (cartModel != nullptr)
-    {
-        cartModel->clear();
-    }
-
-    cartModel = new QSqlQueryModel(ui->tableView);
-    cartModel->setQuery(cartQueryString, QSqlDatabase::database("main connection"));
-
-    auto it = bookTableColumnNames.cbegin();
-    for (int i = 0; i < booksSearchModel->columnCount(); ++i, ++it)
-    {
-        booksSearchModel->setHeaderData(i, Qt::Horizontal, it->first);
-    }
-
-    if (booksSearchModel->lastError().isValid())
-    {
-        QMessageBox::warning(nullptr, "не получилось обратиться к базе данных", booksSearchModel->lastError().text());
-        return;
-    }
-
-    ui->tableView_2->setModel(booksSearchModel);
-    ui->tableView_2->repaint();*/
 }
 
 int ClientsShopPage::getClientId()
