@@ -48,7 +48,7 @@ private:
 
     QString customerEmail;
     QSqlQueryModel *booksSearchModel;
-    QSqlQueryModel *cartModel;
+    QSqlQueryModel *currentCartModel;
     const int impossibleOrderId;
     const int impossibleClientId;
     int currentOrderId;

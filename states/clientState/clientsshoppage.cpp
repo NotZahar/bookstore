@@ -6,7 +6,7 @@ ClientsShopPage::ClientsShopPage(QWidget *parent) :
     ui(new Ui::ClientsShopPage),
     customerEmail(),
     booksSearchModel(nullptr),
-    cartModel(nullptr),
+    currentCartModel(nullptr),
     impossibleOrderId(-1),
     impossibleClientId(-1),
     currentOrderId(impossibleOrderId),
@@ -160,24 +160,34 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
     }
 
     // display cart on view
-    /*QString cartModelQueryString = "";
+    QString currentCartModelQueryString = "SELECT "
+                                   "cart.orderid AS 'номер заказа', "
+                                   "bookcopy.isbn AS 'isbn', "
+                                   "bookcopy.copyid AS 'номер экземпляра' "
+                                   "FROM cart JOIN bookcopy "
+                                   "ON cart.copyid = bookcopy.copyid "
+                                   "WHERE cart.orderid = %1;";
 
-    if (cartModel != nullptr)
+    if (currentCartModel != nullptr)
     {
-        cartModel->clear();
+        currentCartModel->clear();
     }
 
-    cartModel = new QSqlQueryModel(ui->tableView);
-    cartModel->setQuery(cartModelQueryString, QSqlDatabase::database("main connection"));
+    currentCartModel = new QSqlQueryModel(ui->tableView);
+    currentCartModel->setQuery(currentCartModelQueryString
+                               .arg(currentOrderId), QSqlDatabase::database("main connection"));
 
-    if (cartModel->lastError().isValid())
+    if (currentCartModel->lastError().isValid())
     {
-        QMessageBox::warning(nullptr, "не получилось обратиться к базе данных", cartModel->lastError().text());
+        QMessageBox::warning(nullptr, "не получилось обратиться к базе данных", currentCartModel->lastError().text());
         return;
     }
 
-    ui->tableView->setModel(cartModel);
-    ui->tableView->repaint();*/
+    ui->tableView->setModel(currentCartModel);
+    ui->tableView->repaint();
+
+    // отобразить totalcost
+    // изменить статус заказа
 }
 
 int ClientsShopPage::getClientId()
