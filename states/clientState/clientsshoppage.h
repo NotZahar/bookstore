@@ -31,6 +31,7 @@ public:
 
     void setClientEmail(QString clientEmail);
     void addNewOrder();
+    void resetCurrentOrderTotalCost();
 
 signals:
     void clientPaymentWasChosen();

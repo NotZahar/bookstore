@@ -109,15 +109,24 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
     int numberOfCopiesWithCurrentISBN;
     const int impossibleCopyId = -1;
     int copyId = impossibleCopyId;
+
+    QString getAllCopiesOfCurrentISBNQueryString = "SELECT bookcopy.copyid "
+                                     "FROM book JOIN bookcopy ON "
+                                     "book.isbn = bookcopy.isbn "
+                                     "WHERE book.isbn = %1;";
+
+    QString insertIntoCartQueryString = "INSERT INTO cart (orderid, copyid) "
+                                        "VALUES (%1, %2);";
+
+    QString getISBNsCostQueryString = "SELECT DISTINCT cost FROM book JOIN "
+                                      "bookcopy ON book.isbn = bookcopy.isbn "
+                                      "where book.isbn = %1;";
+
     for (int i = 0; i < getAmountOfCurrentISBNs(); ++i)
     {
         currentISBN = booksSearchModel->record(i).value("isbn").toLongLong();
         numberOfCopiesWithCurrentISBN = booksSearchModel->record(i).value("в наличии").toInt();
 
-        QString getAllCopiesOfCurrentISBNQueryString = "SELECT bookcopy.copyid "
-                                         "FROM book JOIN bookcopy ON "
-                                         "book.isbn = bookcopy.isbn "
-                                         "WHERE book.isbn = %1;";
         QSqlQuery getAllCopiesOfCurrentISBNQuery(QSqlDatabase::database("main connection"));
         if (!getAllCopiesOfCurrentISBNQuery.exec(getAllCopiesOfCurrentISBNQueryString
                                                  .arg(currentISBN)))
@@ -134,16 +143,11 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
                 copyId = getAllCopiesOfCurrentISBNQuery.value("copyid").toInt();
             }
 
-            QString insertIntoCartQueryString = "INSERT INTO cart (orderid, copyid) "
-                                                "VALUES (%1, %2);";
             QSqlQuery insertIntoCartQuery(QSqlDatabase::database("main connection"));
             if (insertIntoCartQuery.exec(insertIntoCartQueryString
                                           .arg(currentOrderId)
                                           .arg(copyId)))
             {
-                QString getISBNsCostQueryString = "SELECT DISTINCT cost FROM book JOIN "
-                                                  "bookcopy ON book.isbn = bookcopy.isbn "
-                                                  "where book.isbn = %1;";
                 QSqlQuery getISBNsCostQuery(QSqlDatabase::database("main connection"));
                 if (getISBNsCostQuery.exec(getISBNsCostQueryString
                                               .arg(currentISBN)))
@@ -186,7 +190,7 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
     ui->tableView->setModel(currentCartModel);
     ui->tableView->repaint();
 
-    // отобразить totalcost
+    ui->label->setText(QString("корзина (") + QString::number(currentOrderTotalCost) + QString(" руб.)"));
     // изменить статус заказа
 }
 
@@ -223,6 +227,11 @@ void ClientsShopPage::addNewOrder()
     }
 
     currentOrderId = getCurrentOrderid();
+}
+
+void ClientsShopPage::resetCurrentOrderTotalCost()
+{
+    currentOrderTotalCost = 0;
 }
 
 int ClientsShopPage::getCurrentOrderid()
