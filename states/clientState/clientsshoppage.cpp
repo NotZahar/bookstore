@@ -64,8 +64,8 @@ void ClientsShopPage::booksSearchIsStarted(bool)
                                            .arg(ui->lineEdit->text().simplified())
                                      : QString("SELECT %1 "
                                                "FROM book JOIN bookcopy ON book.isbn = bookcopy.isbn "
-                                               "WHERE book.%2 LIKE '%%3%';"
-                                               "GROUP BY book.isbn")
+                                               "WHERE book.%2 LIKE '%%3%'"
+                                               "GROUP BY book.isbn;")
                                            .arg(booksSearchQueryColumnAliasesString)
                                            .arg( std::find_if(bookTableColumnNames.cbegin(),
                                                              bookTableColumnNames.cend(),
@@ -95,13 +95,18 @@ void ClientsShopPage::booksSearchIsStarted(bool)
 
 void ClientsShopPage::backFromClientShopIsChosen(bool)
 {
-    // !!!!!!!!!!!!!!!!!!!!!!!
+    currentOrderTotalCost = 0;
+
+    // очистить корзину перед уходом
+
+    sdfsdf
 
     emit backFromClientShopWasChosen();
 }
 
 void ClientsShopPage::inCartButtonIsPushed(bool)
 {
+    // update shop
     booksSearchIsStarted();
 
     // push book copies to cart
@@ -109,6 +114,7 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
     int numberOfCopiesWithCurrentISBN;
     const int impossibleCopyId = -1;
     int copyId = impossibleCopyId;
+    bool pushToCartIsSuccessful = false;
 
     QString getAllCopiesOfCurrentISBNQueryString = "SELECT bookcopy.copyid "
                                      "FROM book JOIN bookcopy ON "
@@ -148,6 +154,8 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
                                           .arg(currentOrderId)
                                           .arg(copyId)))
             {
+                pushToCartIsSuccessful = true;
+
                 QSqlQuery getISBNsCostQuery(QSqlDatabase::database("main connection"));
                 if (getISBNsCostQuery.exec(getISBNsCostQueryString
                                               .arg(currentISBN)))
@@ -163,35 +171,12 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
         }
     }
 
-    // display cart on view
-    QString currentCartModelQueryString = "SELECT "
-                                   "cart.orderid AS 'номер заказа', "
-                                   "bookcopy.isbn AS 'isbn', "
-                                   "bookcopy.copyid AS 'номер экземпляра' "
-                                   "FROM cart JOIN bookcopy "
-                                   "ON cart.copyid = bookcopy.copyid "
-                                   "WHERE cart.orderid = %1;";
+    updateCart();
 
-    if (currentCartModel != nullptr)
+    if (pushToCartIsSuccessful)
     {
-        currentCartModel->clear();
+        changeCurrentOrderStatus();
     }
-
-    currentCartModel = new QSqlQueryModel(ui->tableView);
-    currentCartModel->setQuery(currentCartModelQueryString
-                               .arg(currentOrderId), QSqlDatabase::database("main connection"));
-
-    if (currentCartModel->lastError().isValid())
-    {
-        QMessageBox::warning(nullptr, "не получилось обратиться к базе данных", currentCartModel->lastError().text());
-        return;
-    }
-
-    ui->tableView->setModel(currentCartModel);
-    ui->tableView->repaint();
-
-    ui->label->setText(QString("корзина (") + QString::number(currentOrderTotalCost) + QString(" руб.)"));
-    // изменить статус заказа
 }
 
 int ClientsShopPage::getClientId()
@@ -227,11 +212,6 @@ void ClientsShopPage::addNewOrder()
     }
 
     currentOrderId = getCurrentOrderid();
-}
-
-void ClientsShopPage::resetCurrentOrderTotalCost()
-{
-    currentOrderTotalCost = 0;
 }
 
 int ClientsShopPage::getCurrentOrderid()
@@ -279,4 +259,51 @@ int ClientsShopPage::getAmountOfCurrentISBNs()
     }
 
     return amountOfCurrentISBNs;
+}
+
+void ClientsShopPage::updateCart()
+{
+    QString currentCartModelQueryString = "SELECT "
+                                   "cart.orderid AS 'номер заказа', "
+                                   "bookcopy.isbn AS 'isbn', "
+                                   "bookcopy.copyid AS 'номер экземпляра' "
+                                   "FROM cart JOIN bookcopy "
+                                   "ON cart.copyid = bookcopy.copyid "
+                                   "WHERE cart.orderid = %1;";
+
+    if (currentCartModel != nullptr)
+    {
+        currentCartModel->clear();
+    }
+
+    currentCartModel = new QSqlQueryModel(ui->tableView);
+    currentCartModel->setQuery(currentCartModelQueryString
+                               .arg(currentOrderId), QSqlDatabase::database("main connection"));
+
+    if (currentCartModel->lastError().isValid())
+    {
+        QMessageBox::warning(nullptr, "не получилось обратиться к базе данных", currentCartModel->lastError().text());
+        return;
+    }
+
+    ui->tableView->setModel(currentCartModel);
+    ui->tableView->resizeColumnsToContents();
+    ui->tableView->repaint();
+
+    ui->label->setText(QString("корзина (") + QString::number(currentOrderTotalCost) + QString(" руб.)"));
+}
+
+void ClientsShopPage::changeCurrentOrderStatus()
+{
+    QString changeCurrentOrderQueryString = "UPDATE ordering SET orderstatus = '%1', "
+                                            "cost = %2 WHERE orderid = %3;";
+    QSqlQuery changeCurrentQuery(QSqlDatabase::database("main connection"));
+    if (!changeCurrentQuery.exec(changeCurrentOrderQueryString
+                                 .arg("В корзине")
+                                 .arg(currentOrderTotalCost)
+                                 .arg(currentOrderId)))
+    {
+        QMessageBox::warning(nullptr, "проблема с подключением к базе данных", "ошибка запроса");
+        return;
+    }
 }

@@ -43,7 +43,6 @@ void ClientsWorkBench::clientWantsToShop()
     }
 
     clientsShopPageView->setClientEmail(clientsHomePageView->getEmail());
-    clientsShopPageView->resetCurrentOrderTotalCost();
     clientsShopPageView->booksSearchIsStarted();
     clientsShopPageView->addNewOrder();
     changeView(clientsShopPageView);

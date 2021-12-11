@@ -31,7 +31,6 @@ public:
 
     void setClientEmail(QString clientEmail);
     void addNewOrder();
-    void resetCurrentOrderTotalCost();
 
 signals:
     void clientPaymentWasChosen();
@@ -59,6 +58,8 @@ private:
     int getClientId();
     int getCurrentOrderid();
     int getAmountOfCurrentISBNs();
+    void updateCart();
+    void changeCurrentOrderStatus();
 };
 
 #endif // CLIENTSSHOPPAGE_H
