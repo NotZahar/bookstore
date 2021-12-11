@@ -97,18 +97,36 @@ void ClientsShopPage::backFromClientShopIsChosen(bool)
 {
     currentOrderTotalCost = 0;
 
-    // очистить корзину перед уходом
+    // clear cart
+    QString clearCartQueryString = "DELETE FROM cart WHERE orderid = %1;";
+    QSqlQuery clearCartQuery(QSqlDatabase::database("main connection"));
+    if (!clearCartQuery.exec(clearCartQueryString
+                                 .arg(currentOrderId)))
+    {
+        QMessageBox::warning(nullptr, "проблема с подключением к базе данных", "ошибка запроса");
+        return;
+    }
 
-    sdfsdf
+    // delete current order
+    QString deleteCurrentOrderQueryString = "DELETE FROM ordering WHERE orderid = %1;";
+    QSqlQuery deleteCurrentOrderQuery(QSqlDatabase::database("main connection"));
+    if (!deleteCurrentOrderQuery.exec(deleteCurrentOrderQueryString
+                                 .arg(currentOrderId)))
+    {
+        QMessageBox::warning(nullptr, "проблема с подключением к базе данных", "ошибка запроса");
+        return;
+    }
+
+    currentOrderId = impossibleOrderId;
+
+    booksSearchIsStarted();
+    updateCart();
 
     emit backFromClientShopWasChosen();
 }
 
 void ClientsShopPage::inCartButtonIsPushed(bool)
 {
-    // update shop
-    booksSearchIsStarted();
-
     // push book copies to cart
     long long currentISBN;
     int numberOfCopiesWithCurrentISBN;
@@ -177,6 +195,9 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
     {
         changeCurrentOrderStatus();
     }
+
+    // update shop
+    booksSearchIsStarted();
 }
 
 int ClientsShopPage::getClientId()
