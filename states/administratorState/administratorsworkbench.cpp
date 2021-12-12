@@ -16,6 +16,7 @@ AdministratorsWorkBench::~AdministratorsWorkBench()
 
 void AdministratorsWorkBench::setThisStateAsCurrent(QList<QVariant>)
 {
+    employeesSignUpView->updateEmployeesTable();
     currentView->show();
 }
 

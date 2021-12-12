@@ -9,7 +9,6 @@
 #include <QSqlRecord>
 #include <QSqlTableModel>
 #include <QMessageBox>
-#include <QString>
 #include <vector>
 #include <utility>
 #include <algorithm>
