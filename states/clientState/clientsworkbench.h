@@ -20,7 +20,7 @@ public:
 private slots:
     void clientWantsToShop();
     void clientExitsFromHomePage();
-    void clientPaymentIsChosen();
+    void orderIsMade(int orderId);
     void backFromClientShopIsChosen();
     void backFromClientPaymentIsChosen();
 

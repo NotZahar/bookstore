@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>350</width>
+    <width>363</width>
     <height>200</height>
    </rect>
   </property>
@@ -216,7 +216,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>book store</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -319,7 +319,7 @@
          </item>
          <item>
           <property name="text">
-           <string>Наличные</string>
+           <string>Наличными</string>
           </property>
          </item>
         </widget>

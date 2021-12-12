@@ -33,8 +33,8 @@ public:
     void addNewOrder();
 
 signals:
-    void clientPaymentWasChosen();
     void backFromClientShopWasChosen();
+    void orderWasMade(int orderId);
 
 public slots:
     void booksSearchIsStarted(bool c = false);
@@ -42,6 +42,7 @@ public slots:
 private slots:
     void backFromClientShopIsChosen(bool c);
     void inCartButtonIsPushed(bool c);
+    void orderButtonIsPushed(bool c);
 
 private:
     Ui::ClientsShopPage *ui;

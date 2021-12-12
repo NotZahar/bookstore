@@ -26,6 +26,7 @@ ClientsShopPage::ClientsShopPage(QWidget *parent) :
     QObject::connect(ui->pushButton, &QPushButton::clicked, this, &ClientsShopPage::booksSearchIsStarted);
     QObject::connect(ui->pushButton_2, &QPushButton::clicked, this, &ClientsShopPage::backFromClientShopIsChosen);
     QObject::connect(ui->pushButton_3, &QPushButton::clicked, this, &ClientsShopPage::inCartButtonIsPushed);
+    QObject::connect(ui->pushButton_4, &QPushButton::clicked, this, &ClientsShopPage::orderButtonIsPushed);
 }
 
 ClientsShopPage::~ClientsShopPage()
@@ -198,6 +199,17 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
 
     // update shop
     booksSearchIsStarted();
+}
+
+void ClientsShopPage::orderButtonIsPushed(bool)
+{
+    if (currentOrderTotalCost > 0)
+    {
+        emit orderWasMade(currentOrderId);
+        return;
+    }
+
+    QMessageBox::information(nullptr, "ошибка заказа", "корзина пуста");
 }
 
 int ClientsShopPage::getClientId()

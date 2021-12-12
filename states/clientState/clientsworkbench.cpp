@@ -39,7 +39,7 @@ void ClientsWorkBench::clientWantsToShop()
     {
         clientsShopPageView = new ClientsShopPage();
         QObject::connect(clientsShopPageView, &ClientsShopPage::backFromClientShopWasChosen, this, &ClientsWorkBench::backFromClientShopIsChosen);
-        QObject::connect(clientsShopPageView, &ClientsShopPage::clientPaymentWasChosen, this, &ClientsWorkBench::clientPaymentIsChosen);
+        QObject::connect(clientsShopPageView, &ClientsShopPage::orderWasMade, this, &ClientsWorkBench::orderIsMade);
     }
 
     clientsShopPageView->setClientEmail(clientsHomePageView->getEmail());
@@ -54,7 +54,7 @@ void ClientsWorkBench::clientExitsFromHomePage()
     emit stateWasFinished(Bookstore::states::entrance, {});
 }
 
-void ClientsWorkBench::clientPaymentIsChosen()
+void ClientsWorkBench::orderIsMade(int orderId)
 {
     if (clientPaymentView == nullptr)
     {
@@ -62,6 +62,7 @@ void ClientsWorkBench::clientPaymentIsChosen()
         QObject::connect(clientPaymentView, &ClientPayment::backFromClientPaymentWasChosen, this, &ClientsWorkBench::backFromClientPaymentIsChosen);
     }
 
+    clientPaymentView->setOrderId(orderId);
     changeView(clientPaymentView);
 }
 
@@ -73,7 +74,7 @@ void ClientsWorkBench::backFromClientShopIsChosen()
 
 void ClientsWorkBench::backFromClientPaymentIsChosen()
 {
-    clientsShopPageView->booksSearchIsStarted();
+    // ^^^^^^^^^^^^^^ clientsShopPageView->booksSearchIsStarted();
     changeView(clientsShopPageView);
 }
 
