@@ -22,7 +22,7 @@ private slots:
     void clientExitsFromHomePage();
     void orderIsMade(int orderId);
     void backFromClientShopIsChosen();
-    void backFromClientPaymentIsChosen();
+    void backFromClientPaymentIsChosen(bool orderWasPaidFor);
 
 private:
     ClientsHomePage *clientsHomePageView;

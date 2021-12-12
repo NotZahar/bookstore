@@ -13,7 +13,6 @@
 #include <vector>
 #include <utility>
 #include <algorithm>
-#include <QDebug>
 
 #include "../../bookstore.h"
 
@@ -31,6 +30,7 @@ public:
 
     void setClientEmail(QString clientEmail);
     void addNewOrder();
+    void updateCart();
 
 signals:
     void backFromClientShopWasChosen();
@@ -59,7 +59,6 @@ private:
     int getClientId();
     int getCurrentOrderid();
     int getAmountOfCurrentISBNs();
-    void updateCart();
     void changeCurrentOrderStatus();
 };
 

@@ -72,9 +72,15 @@ void ClientsWorkBench::backFromClientShopIsChosen()
     changeView(clientsHomePageView);
 }
 
-void ClientsWorkBench::backFromClientPaymentIsChosen()
+void ClientsWorkBench::backFromClientPaymentIsChosen(bool orderWasPaidFor)
 {
-    // ^^^^^^^^^^^^^^ clientsShopPageView->booksSearchIsStarted();
+    if (orderWasPaidFor)
+    {
+        clientsShopPageView->addNewOrder();
+        clientsShopPageView->updateCart();
+    }
+
+    clientsShopPageView->booksSearchIsStarted();
     changeView(clientsShopPageView);
 }
 

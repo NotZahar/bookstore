@@ -2,6 +2,12 @@
 #define CLIENTPAYMENT_H
 
 #include <QWidget>
+#include <QSql>
+#include <QSqlError>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QMessageBox>
 
 namespace Ui {
 class ClientPayment;
@@ -18,15 +24,19 @@ public:
     void setOrderId(int orderId);
 
 signals:
-    void backFromClientPaymentWasChosen();
+    void backFromClientPaymentWasChosen(bool orderWasPaidFor);
 
 private slots:
     void backFromClientPaymentIsChosen(bool c);
+    void paymentIsChosen(bool c);
 
 private:
     Ui::ClientPayment *ui;
 
+    const int impossiblePointId;
     int currentOrderId;
+
+    int getPointId(QString address);
 };
 
 #endif // CLIENTPAYMENT_H

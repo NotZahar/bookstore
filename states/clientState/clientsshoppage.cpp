@@ -96,8 +96,6 @@ void ClientsShopPage::booksSearchIsStarted(bool)
 
 void ClientsShopPage::backFromClientShopIsChosen(bool)
 {
-    currentOrderTotalCost = 0;
-
     // clear cart
     QString clearCartQueryString = "DELETE FROM cart WHERE orderid = %1;";
     QSqlQuery clearCartQuery(QSqlDatabase::database("main connection"));
@@ -119,6 +117,7 @@ void ClientsShopPage::backFromClientShopIsChosen(bool)
     }
 
     currentOrderId = impossibleOrderId;
+    currentOrderTotalCost = 0;
 
     booksSearchIsStarted();
     updateCart();
@@ -245,6 +244,7 @@ void ClientsShopPage::addNewOrder()
     }
 
     currentOrderId = getCurrentOrderid();
+    currentOrderTotalCost = 0;
 }
 
 int ClientsShopPage::getCurrentOrderid()

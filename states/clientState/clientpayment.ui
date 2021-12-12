@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>363</width>
+    <width>504</width>
     <height>200</height>
    </rect>
   </property>
@@ -304,6 +304,12 @@
        </item>
        <item>
         <widget class="QComboBox" name="comboBox">
+         <property name="minimumSize">
+          <size>
+           <width>219</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="currentIndex">
           <number>0</number>
          </property>
@@ -346,6 +352,12 @@
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QComboBox" name="comboBox_2">
+         <property name="minimumSize">
+          <size>
+           <width>219</width>
+           <height>0</height>
+          </size>
+         </property>
          <item>
           <property name="text">
            <string>г. Казань, ул. Гагарина, 93</string>
