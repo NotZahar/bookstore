@@ -45,6 +45,12 @@ private slots:
     void orderButtonIsPushed(bool c);
 
 private:
+    int getClientId();
+    int getCurrentOrderid();
+    int getAmountOfCurrentISBNs();
+    void changeCurrentOrderStatus();
+
+private:
     Ui::ClientsShopPage *ui;
 
     QString customerEmail;
@@ -55,11 +61,6 @@ private:
     int currentOrderId;
     int currentOrderTotalCost;
     const std::vector<std::pair<QString, QString>> bookTableColumnNames;
-
-    int getClientId();
-    int getCurrentOrderid();
-    int getAmountOfCurrentISBNs();
-    void changeCurrentOrderStatus();
 };
 
 #endif // CLIENTSSHOPPAGE_H

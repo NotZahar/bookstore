@@ -7,6 +7,7 @@
 #include "../bookstore.h"
 #include "./states/entranceState/entrance.h"
 #include "./states/clientState/clientsworkbench.h"
+#include "./states/administratorState/administratorsworkbench.h"
 
 class StateManager : public QObject
 {
@@ -19,7 +20,7 @@ public:
 
     static State *createState(int stateId);
 
-public slots:
+private slots:
     void stateIsFinished(int newStateId, QList<QVariant> data);
 
 private:

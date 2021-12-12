@@ -5,7 +5,7 @@
 #include "clientsshoppage.h"
 #include "clientpayment.h"
 #include "../state.h"
-#include "bookstore.h"
+#include "../../bookstore.h"
 
 class ClientsWorkBench : public State
 {
@@ -25,13 +25,14 @@ private slots:
     void backFromClientPaymentIsChosen(bool orderWasPaidFor);
 
 private:
+    void changeView(QWidget *view);
+
+private:
     ClientsHomePage *clientsHomePageView;
     ClientsShopPage *clientsShopPageView;
     ClientPayment *clientPaymentView;
 
     QWidget *currentView;
-
-    void changeView(QWidget *view);
 };
 
 #endif // CLIENTSWORKBENCH_H

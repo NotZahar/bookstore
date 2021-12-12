@@ -31,12 +31,13 @@ private slots:
     void paymentIsChosen(bool c);
 
 private:
+    int getPointId(QString address);
+
+private:
     Ui::ClientPayment *ui;
 
     const int impossiblePointId;
     int currentOrderId;
-
-    int getPointId(QString address);
 };
 
 #endif // CLIENTPAYMENT_H

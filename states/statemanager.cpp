@@ -22,6 +22,8 @@ State *StateManager::createState(int stateId)
         return new Entrance();
     case Bookstore::states::clientsWorkBench:
         return new ClientsWorkBench();
+    case Bookstore::states::administratorsWorkBench:
+        return new AdministratorsWorkBench();
     default:
         return nullptr;
     }

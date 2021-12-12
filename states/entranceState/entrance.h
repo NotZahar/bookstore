@@ -24,6 +24,9 @@ private slots:
     void userSignedInSystem();
 
 private:
+    void changeView(QWidget *view);
+
+private:
     int userRole;
 
     UserChoice *userChoiceView;
@@ -31,8 +34,6 @@ private:
     ClientSignUp *clientSignUpView;
 
     QWidget *currentView;
-
-    void changeView(QWidget *view);
 };
 
 #endif // ENTRANCE_H

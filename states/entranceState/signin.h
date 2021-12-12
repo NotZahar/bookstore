@@ -36,11 +36,12 @@ private slots:
     void backFromSignInButtonIsPushed(bool c);
 
 private:
+    QString getTableName();
+
+private:
     Ui::SignIn *ui;
 
     int userRole;
-
-    QString getTableName();
 };
 
 #endif // SIGNIN_H
