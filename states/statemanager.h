@@ -7,6 +7,7 @@
 #include "../bookstore.h"
 #include "./states/entranceState/entrance.h"
 #include "./states/clientState/clientsworkbench.h"
+#include "./states/storekeeperState/storekeepersworkbench.h"
 #include "./states/administratorState/administratorsworkbench.h"
 
 class StateManager : public QObject

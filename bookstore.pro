@@ -20,6 +20,10 @@ SOURCES += \
     states/entranceState/userchoice.cpp \
     states/state.cpp \
     states/statemanager.cpp \
+    states/storekeeperState/skwarehouse.cpp \
+    states/storekeeperState/storekeepersbooks.cpp \
+    states/storekeeperState/storekeepershomepage.cpp \
+    states/storekeeperState/storekeepersworkbench.cpp
 
 HEADERS += \
     bookstore.h \
@@ -35,6 +39,10 @@ HEADERS += \
     states/entranceState/userchoice.h \
     states/state.h \
     states/statemanager.h \
+    states/storekeeperState/skwarehouse.h \
+    states/storekeeperState/storekeepersbooks.h \
+    states/storekeeperState/storekeepershomepage.h \
+    states/storekeeperState/storekeepersworkbench.h
 
 FORMS += \
     states/administratorState/employeessignup.ui \
@@ -44,6 +52,9 @@ FORMS += \
     states/entranceState/clientsignup.ui \
     states/entranceState/signin.ui \
     states/entranceState/userchoice.ui \
+    states/storekeeperState/skwarehouse.ui \
+    states/storekeeperState/storekeepersbooks.ui \
+    states/storekeeperState/storekeepershomepage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
