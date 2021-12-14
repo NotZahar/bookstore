@@ -62,7 +62,6 @@ void StoreKeepersBooks::updateBooksTable()
 
 void StoreKeepersBooks::backFromBooksButtonIsPushed(bool)
 {
-    updateBooksTable();
     emit backFromBooksButtonWasPushed();
 }
 

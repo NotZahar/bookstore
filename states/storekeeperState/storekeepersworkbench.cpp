@@ -48,6 +48,8 @@ void StoreKeepersWorkBench::storeKeeperWantsToGoToWarehouse()
         QObject::connect(warehouseView, &SKWarehouse::backFromWarehouseButtonWasPushed, this, &StoreKeepersWorkBench::backFromSKWarehouseIsChosen);
     }
 
+    warehouseView->updateWarehouseTable();
+    warehouseView->updateCartTable();
     changeView(warehouseView);
 }
 
@@ -59,6 +61,7 @@ void StoreKeepersWorkBench::storeKeeperWantsToGoToBooks()
         QObject::connect(booksView, &StoreKeepersBooks::backFromBooksButtonWasPushed, this, &StoreKeepersWorkBench::backFromSKBooksIsChosen);
     }
 
+    booksView->updateBooksTable();
     changeView(booksView);
 }
 
