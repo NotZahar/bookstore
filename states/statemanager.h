@@ -8,6 +8,7 @@
 #include "./states/entranceState/entrance.h"
 #include "./states/clientState/clientsworkbench.h"
 #include "./states/storekeeperState/storekeepersworkbench.h"
+#include "./states/dpoperatorState/dpoperatorsworkbench.h"
 #include "./states/administratorState/administratorsworkbench.h"
 
 class StateManager : public QObject
@@ -19,10 +20,11 @@ public:
     explicit StateManager(int initialStateId);
     ~StateManager();
 
-    static State *createState(int stateId);
-
 private slots:
     void stateIsFinished(int newStateId, QList<QVariant> data);
+
+private:
+    static State *createState(int stateId);
 
 private:
     QMap<int, State *> states;

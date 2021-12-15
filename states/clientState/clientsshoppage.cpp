@@ -146,7 +146,8 @@ void ClientsShopPage::inCartButtonIsPushed(bool)
                                       "bookcopy ON book.isbn = bookcopy.isbn "
                                       "where book.isbn = %1;";
 
-    for (int i = 0; i < getAmountOfCurrentISBNs(); ++i)
+    const int amountOfCurrentISBNs = getAmountOfCurrentISBNs();
+    for (int i = 0; i < amountOfCurrentISBNs; ++i)
     {
         currentISBN = booksSearchModel->record(i).value("isbn").toLongLong();
         numberOfCopiesWithCurrentISBN = booksSearchModel->record(i).value("в наличии").toInt();

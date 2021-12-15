@@ -14,6 +14,9 @@ SOURCES += \
     states/clientState/clientshomepage.cpp \
     states/clientState/clientsshoppage.cpp \
     states/clientState/clientsworkbench.cpp \
+    states/dpoperatorState/dp.cpp \
+    states/dpoperatorState/dpoperatorshomepage.cpp \
+    states/dpoperatorState/dpoperatorsworkbench.cpp \
     states/entranceState/clientsignup.cpp \
     states/entranceState/entrance.cpp \
     states/entranceState/signin.cpp \
@@ -33,6 +36,9 @@ HEADERS += \
     states/clientState/clientshomepage.h \
     states/clientState/clientsshoppage.h \
     states/clientState/clientsworkbench.h \
+    states/dpoperatorState/dp.h \
+    states/dpoperatorState/dpoperatorshomepage.h \
+    states/dpoperatorState/dpoperatorsworkbench.h \
     states/entranceState/clientsignup.h \
     states/entranceState/entrance.h \
     states/entranceState/signin.h \
@@ -49,6 +55,8 @@ FORMS += \
     states/clientState/clientpayment.ui \
     states/clientState/clientshomepage.ui \
     states/clientState/clientsshoppage.ui \
+    states/dpoperatorState/dp.ui \
+    states/dpoperatorState/dpoperatorshomepage.ui \
     states/entranceState/clientsignup.ui \
     states/entranceState/signin.ui \
     states/entranceState/userchoice.ui \

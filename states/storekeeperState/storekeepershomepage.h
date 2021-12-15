@@ -9,7 +9,6 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlRecord>
-#include <QSqlTableModel>
 #include <QMessageBox>
 #include <QDate>
 

@@ -24,6 +24,8 @@ State *StateManager::createState(int stateId)
         return new ClientsWorkBench();
     case Bookstore::states::storekeepersWorkBench:
         return new StoreKeepersWorkBench();
+    case Bookstore::states::dpoperatorsWorkBench:
+        return new DPOperatorsWorkBench();
     case Bookstore::states::administratorsWorkBench:
         return new AdministratorsWorkBench();
     default:

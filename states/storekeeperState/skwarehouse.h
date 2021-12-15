@@ -13,8 +13,6 @@
 #include <vector>
 #include <utility>
 
-#include "QDebug"
-
 #include "../../bookstore.h"
 
 namespace Ui {
