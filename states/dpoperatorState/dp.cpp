@@ -17,7 +17,7 @@ DP::DP(QWidget *parent) :
     ui->setupUi(this);
 
     QObject::connect(ui->pushButton, &QPushButton::clicked, this, &DP::searchIsStarted);
-    QObject::connect(ui->pushButton_2, &QPushButton::clicked, this, &DP::deleteIsStarted);
+    QObject::connect(ui->pushButton_2, &QPushButton::clicked, this, &DP::updateStatusIsStarted);
     QObject::connect(ui->pushButton_3, &QPushButton::clicked, this, &DP::operatorExitsFromDP);
 }
 
@@ -71,14 +71,14 @@ void DP::operatorExitsFromDP(bool)
     emit backFromDPWasChosen();
 }
 
-void DP::deleteIsStarted(bool)
+void DP::updateStatusIsStarted(bool)
 {
     if (ordersModel->record(0).isEmpty())
     {
         return;
     }
 
-    QString deleteOrderQueryString = "DELETE FROM ordering WHERE orderid = %1;";
+    QString deleteOrderQueryString = "UPDATE ordering SET orderstatus = 'Завершен' WHERE orderid = %1;";
     QSqlQuery deleteOrderQuery(QSqlDatabase::database("main connection"));
     if (!deleteOrderQuery.exec(deleteOrderQueryString
                                  .arg(ordersModel->record(0).value("код заказа").toInt())))

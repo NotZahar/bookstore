@@ -34,7 +34,7 @@ signals:
 
 private slots:
     void operatorExitsFromDP(bool c);
-    void deleteIsStarted(bool c);
+    void updateStatusIsStarted(bool c);
     void searchIsStarted(bool c);
 
 private:
